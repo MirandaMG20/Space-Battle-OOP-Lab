@@ -9,14 +9,19 @@ class spaceShip {
     attack(enemy) {
         if (Math.random() < this.accuracy) {
             console.log("%c You HIT the alien!!!", "color: red");
-            enemy.hull -= this.firepower; // subtracts the value on the right-hand side from the value on the left-hand side and assigns the result back to the variable on the left-hand side
-            console.log(`Alien has ${enemy.hull} hull remaining.`);
+            if (this.firepower >= enemy.hull) {
+                enemy.hull = 0;
+            } else {
+                enemy.hull -= this.firepower;
+            }
+            console.log(`%c Alien has ${enemy.hull} hull remaining.`, `font-style: italic; border: 1px solid grey;`);
             if (enemy.hull <= 0) {
                 console.log('Alien ship destroyed!');
             }
         } else {
             console.log("%c You MISSED the alien!!!", "color: red");
         }
+
     }
 }
 
@@ -25,21 +30,23 @@ const ussAssembly = new spaceShip(20, 5, 0.7);
 
 // Alien ships
 const Aliens = [];
-const alienShips = 6;
+const alienShips = 6; // number of ships
 
 for (let i = 0; i < alienShips; i++) {
-    const hull = Math.floor(Math.random() * 4) + 3;
-    const firepower = Math.floor(Math.random() * 3) + 2;
-    const accuracy = Math.random() * (0.2 + 0.6) + 0.2;
+    const hull = Math.floor(Math.random() * 6) + 3;
+    const firepower = Math.floor(Math.random() * 4) + 2;
+    const accuracy = Math.random() * (0.6 + 0.8) + 0.6;
     const Alien = new spaceShip(hull, firepower, accuracy);
     Aliens.push(Alien);
 }
 
 let gameOver = false;
 
+// Game round
 function gameRound() {
     const currentAlien = Aliens[0];
 
+    // ussAssembly attack first
     console.log("%c You are attacking an alien!", "color: green");
     ussAssembly.attack(currentAlien);
 
@@ -52,10 +59,10 @@ function gameRound() {
             return;
         }
 
-        const choice = window.prompt("Do you want to attack the next ship or retreat? (attack/retreat)");
-        if (choice === "attack") {
+        const Choice = window.prompt('Do you want to "Attack" the next ship or "Retreat"? Answer: a || r');
+        if (Choice === "a") {
             gameRound();
-        } else if (choice === "retreat") {
+        } else if (Choice === "r") {
             console.log("%c You retreated from the battle. Game over.", "color: orange");
             gameOver = true;
             return;
@@ -83,9 +90,23 @@ function gameRound() {
 gameRound();
 
 
+
+
+
+
+// const attackButton = document.getElementById("attackButton");
+// attackButton.addEventListener("click", () => {
+//     gameRound();
+// });
+
+// const retreatButton = document.getElementById("retreatButton");
+// retreatButton.addEventListener("click", () => {
+//     console.log("%c You retreated from the battle. Game over.", "color: orange");
+//     gameOver = true;
+// });
+
 // const btnAttack = document.querySelector('button');
 // btnAttack.addEventListener('click', attack);
-
 
 // let min = 0.2;
 // let max = 0.6;
