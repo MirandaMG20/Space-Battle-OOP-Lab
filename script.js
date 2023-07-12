@@ -1,4 +1,4 @@
-// Ship with properties and methods 
+// Ship calss with properties and methods 
 class spaceShip {
     constructor(hull, firepower, accuracy) {
         this.hull = hull;
@@ -6,6 +6,7 @@ class spaceShip {
         this.accuracy = accuracy;
     }
 
+    // Method to attack 
     attack(enemy) {
         if (Math.random() < this.accuracy) {
             console.log("%c You HIT the alien!!!", "color: red");
@@ -30,12 +31,12 @@ const ussAssembly = new spaceShip(20, 5, 0.7);
 
 // Alien ships
 const Aliens = [];
-const alienShips = 6; // number of ships
+const alienShips = 6; 
 
 for (let i = 0; i < alienShips; i++) {
     const hull = Math.floor(Math.random() * 6) + 3;
     const firepower = Math.floor(Math.random() * 4) + 2;
-    const accuracy = Math.random() * (0.6 + 0.8) + 0.6;
+    const accuracy = Math.random() * (0.6 - 0.8) + 0.6;
     const Alien = new spaceShip(hull, firepower, accuracy);
     Aliens.push(Alien);
 }

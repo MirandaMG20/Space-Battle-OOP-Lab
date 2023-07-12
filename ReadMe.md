@@ -7,17 +7,18 @@
 BIND METHODS TO USE THEM AS EVENT LISTENERS! 
 
 Example: 
-``class Example {
-	constructor(name){
-		this.name = name
-		this.method = this.method.bind(this)
-	}
-	methodFromExample(){
-	 return this.name
-	}
-}
-const btnEl = document.querySelector('button')
-btnEl.addEventListener('click', methodFromExample)``
+`class Example {`
+`constructor(name){`
+`this.name = name`
+`this.method = this.method.bind(this)`
+`}`
+`methodFromExample(){`
+`return this.name`
+`}`
+`}`
+
+`const btnEl = document.querySelector('button')`
+`btnEl.addEventListener('click', methodFromExample)`
 
 ## Game Specifications:
 There are six alien ships. The aliens' weakness is that they are too logical and attack one at a time: they will wait to see the outcome of a battle before deploying another alien ship. Your strength is that you have the initiative and get to attack first. However, you do not have targeting lasers and can only attack the aliens in order. After you have destroyed a ship, you have the option to make a hasty retreat.
@@ -48,10 +49,16 @@ firepower - between 2 and 4
 accuracy - between .6 and .8
 
 Example use of accuracy to determine a hit: 
- 
- if (Math.random() < alien[0].accuracy) {
-	console.log('You have been hit!'); }
+`if (Math.random() < alien[0].accuracy) {`
+`console.log('You have been hit!'); }`
 
 Start with the actors and then the actions. In this case, we need our spaceship and the alien spaceships. An action these ships can take is to attack something. Perhaps a ship object (an actor) could therefore have an attack method (an action). 
 
 A repeating action in the game is that these ships attack each other until one of them has been destroyed. This might necessitate a loop or multiple loops.
+
+- Output in Chrome console:
+You can use CSS in your Chrome console messages. Above is a simple example where messages are easier to differentiate.
+- Formula, use %c in the first argument to console log, and provide CSS to the second argument: 
+`console.log('%c spacebattle', 'font-size: 40px');`
+- Use multiple CSS properties: 
+`console.log('%c You have done ' + player.firepower + ' damage ', 'font-style: italic; background: azure; border: 1px solid grey;');`
